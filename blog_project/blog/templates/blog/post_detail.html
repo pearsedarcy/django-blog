@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %} {% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<div class="container mx-auto mt-8 px-4">
+  <div
+    class="card bg-base-200 shadow-lg hover:shadow-2xl transition-all duration-300"
+  >
+    <figure>
+      <img
+        src="https://via.placeholder.com/500"
+        alt="{{ post.title }}"
+        class="w-full h-48 object-cover"
+      />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title text-secondary">{{ post.title }}</h2>
+      <p class="text-sm text-neutral-500">
+        {{ post.created|date:"F j, Y" }} by {{ post.author }}
+      </p>
+      <div>{{ post.body }}</div>
+      <div class="card-actions justify-end mt-4">
+        <a href="{% url 'post_list' %}" class="btn btn-accent"
+          >Back to all posts</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
