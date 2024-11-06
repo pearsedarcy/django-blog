@@ -24,12 +24,15 @@ from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.post_list, name="post_list"),
+    path("add-post/", views.add_post, name="add_post"),
     path("<slug:slug>/", views.post_detail, name="post_detail"),
     path("post/<slug:slug>/", views.post_detail, name="post_detail"),
     path("comment/<int:comment_id>/edit/", views.edit_comment, name="edit_comment"),
     path(
         "comment/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"
     ),
+    path("post/<int:post_id>/edit/", views.edit_post, name="edit_post"),
+    path("post/<int:post_id>/delete/", views.delete_post, name="delete_post"),
     path("login/", views.loginView, name="login"),
     # path("profile/", views.ProfileView.as_view(), name="profile"),
     # path("logout/", views.LogoutView.as_view(), name="logout"),

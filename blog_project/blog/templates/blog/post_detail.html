@@ -10,6 +10,16 @@
       <div class="py-4">
         <p>{{ post.body }}</p>
       </div>
+      {% if post.author == user %}
+      <div class="card-actions justify-end mt-4">
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-primary"
+          >Edit</a
+        >
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-danger"
+          >Delete</a
+        >
+      </div>
+      {% endif %}
     </div>
   </div>
 

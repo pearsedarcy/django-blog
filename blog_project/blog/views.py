@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from slugify import slugify
 from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
 # views.py
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 # Create your views here.
@@ -82,3 +83,50 @@ def loginView(request):
         form = AuthenticationForm()
 
     return render(request, "login.html", {"form": form})
+
+
+@login_required
+def add_post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user  # Set the author to the logged-in user
+            post.slug = slugify(post.title)  # Generate slug from title
+            post.save()
+            return redirect("post_list")  # Redirect after saving
+    else:
+        form = PostForm()
+
+    return render(request, "add_post.html", {"form": form})
+
+
+@login_required
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Ensure the user is the post author
+    if request.user != post.author:
+        return redirect("post_detail", slug=post.slug)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect("post_detail", slug=post.slug)
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, "blog/edit_post.html", {"form": form, "post": post})
+
+
+@login_required
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Ensure the user is the post author
+    if request.user != post.author:
+        return redirect("post_detail", slug=post.slug)
+
+    post.delete()
+    return redirect("post_list")

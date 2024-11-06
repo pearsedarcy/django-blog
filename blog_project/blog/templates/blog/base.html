@@ -16,12 +16,27 @@
             <a class="btn btn-ghost text-xl" href="/">MY BLOG</a>
           </div>
           <div class="flex-none gap-2">
-            <div class="form-control">
-              <input
-                type="text"
-                placeholder="Search"
-                class="input input-bordered w-24 md:w-auto"
-              />
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn m-1">+ ↓</div>
+              <ul
+                tabindex="0"
+                class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+              >
+                {% if user.is_authenticated %}
+                <button class="btn btn-secondary">
+                  <li>
+                    <a href="{% url 'add_post' %}">Add Post</a>
+                  </li>
+                </button>
+
+                {% else %}
+                <button class="btn btn-secondary">
+                  <li>
+                    <a href="{% url 'admin:login' %}">Login</a>
+                  </li>
+                </button>
+                {% endif %}
+              </ul>
             </div>
             <div class="dropdown dropdown-end">
               <div
