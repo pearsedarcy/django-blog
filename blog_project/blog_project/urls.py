@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path
 from blog import views
 from django.contrib.auth.views import LoginView, LogoutView
+from blog.models import Post
+from django.shortcuts import render
 
 
 urlpatterns = [
