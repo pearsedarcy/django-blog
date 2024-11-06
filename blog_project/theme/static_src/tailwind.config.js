@@ -31,15 +31,15 @@ module.exports = {
      * patterns match your project structure.
      */
     /* JS 1: Ignore any JavaScript in node_modules folder. */
-    // '!../../**/node_modules',
+    "!../../**/node_modules",
     /* JS 2: Process all JavaScript files in the project. */
-    // '../../**/*.js',
+    "../../**/*.js",
 
     /**
      * Python: If you use Tailwind CSS classes in Python, uncomment the following line
      * and make sure the pattern below matches your project structure.
      */
-    // '../../**/*.py'
+    "../../**/*.py",
   ],
   theme: {
     extend: {},
@@ -57,5 +57,15 @@ module.exports = {
   ],
   daisyui: {
     themes: ["dark", "forest", "dracula"],
+  },
+  daisyui: {
+    themes: ["dark", "forest", "dracula"],
+    darkTheme: "dark", // name of one of the included themes for dark mode
+    base: true, // applies background color and foreground color for root element by default
+    styled: true, // include daisyUI colors and design decisions for all components
+    utils: true, // adds responsive and modifier utility classes
+    prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
+    logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
+    themeRoot: ":root", // The element that receives theme color CSS variables
   },
 };

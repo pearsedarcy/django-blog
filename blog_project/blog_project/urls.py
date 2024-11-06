@@ -18,11 +18,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views
+from django.contrib.auth.views import LoginView, LogoutView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.post_list, name="post_list"),
     path("<slug:slug>/", views.post_detail, name="post_detail"),
+    path("post/<slug:slug>/", views.post_detail, name="post_detail"),
+    path("comment/<int:comment_id>/edit/", views.edit_comment, name="edit_comment"),
+    path(
+        "comment/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"
+    ),
+    path("login/", views.loginView, name="login"),
+    # path("profile/", views.ProfileView.as_view(), name="profile"),
+    # path("logout/", views.LogoutView.as_view(), name="logout"),
 ]
 
 
