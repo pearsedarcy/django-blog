@@ -25,6 +25,7 @@ class PostForm(forms.ModelForm):
         fields = [
             "title",
             "body",
+            "cover_image",
         ]  # Excluding 'slug' and 'author' since these will be handled automatically
 
     body = forms.CharField(
@@ -45,4 +46,13 @@ class PostForm(forms.ModelForm):
             }
         ),
         label="",
+    )
+    cover_image = forms.ImageField(
+        required=False,
+        widget=forms.ClearableFileInput(
+            attrs={
+                "class": "file-input file-input-bordered w-full file-input-secondary",
+            }
+        ),
+        label="Cover Image",
     )

@@ -7,6 +7,15 @@
       <p class="text-sm text-neutral-500">
         {{ post.created|date:"F j, Y" }} by {{ post.author }}
       </p>
+      {% if post.cover_image %}
+      <div class="py-4">
+        <img
+          src="{{ post.cover_image.url }}"
+          alt="{{ post.title }}"
+          class="w-full h-auto object-cover mb-4"
+        />
+      </div>
+      {% endif %}
       <div class="py-4">
         <p>{{ post.body }}</p>
       </div>

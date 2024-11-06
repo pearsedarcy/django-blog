@@ -21,6 +21,8 @@ from blog import views
 from django.contrib.auth.views import LoginView, LogoutView
 from blog.models import Post
 from django.shortcuts import render
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -39,6 +41,10 @@ urlpatterns = [
     # path("profile/", views.ProfileView.as_view(), name="profile"),
     # path("logout/", views.LogoutView.as_view(), name="logout"),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 def post_list(request):
